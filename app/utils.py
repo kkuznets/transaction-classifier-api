@@ -1,8 +1,10 @@
-from fastapi import HTTPException
-from models import TransactionCreate, CategoryChoices
-from openai import OpenAI
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+from fastapi import HTTPException
+from openai import OpenAI
+
+from app.models import CategoryChoices, TransactionCreate
 
 load_dotenv()
 
@@ -15,9 +17,9 @@ def classify_transaction(transaction: TransactionCreate) -> CategoryChoices:
     Classify the following transaction into one of the categories:
     {', '.join([cat.value for cat in CategoryChoices])}.
     Transaction details:
-        counterpart name = {transaction.counterpartName},
+        counterpart name = {transaction.counterpart_name},
         amount = {transaction.amount},
-        type = {transaction.transactionType}
+        transaction type = {transaction.transaction_type}
     Answer with the category name only.
     """
     response = client.chat.completions.create(

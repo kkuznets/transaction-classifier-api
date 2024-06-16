@@ -1,9 +1,12 @@
-from fastapi import Query
-from typing import Optional
 from datetime import datetime
-from models import CategoryURLChoices
+from typing import Optional
+
+from fastapi import Query
+
+from app.models import CategoryURLChoices
 
 
+# Get counterpart name from query parameters in routes
 def get_counterpart_name(
     counterpart_name: Optional[str] = Query(
         None,
@@ -15,6 +18,7 @@ def get_counterpart_name(
     return counterpart_name
 
 
+# Get category from query parameters in routes
 def get_category(
     category: Optional[CategoryURLChoices] = Query(
         None,
@@ -26,6 +30,7 @@ def get_category(
     return category
 
 
+# Get start date from query parameters in routes
 def get_start_date(
     start_date: Optional[datetime] = Query(
         None,
@@ -37,6 +42,7 @@ def get_start_date(
     return start_date
 
 
+# Get end date from query parameters in routes
 def get_end_date(
     end_date: Optional[datetime] = Query(
         None,
