@@ -109,12 +109,13 @@ pgAdmin4 can be used to manage the PostgreSQL database. To connect to the databa
 - **Configuration Management**: Poetry is used for dependency management and packaging.
 - **Database Migrations**: Alembic is used for handling database migrations if the schema changes.
 - **API Documentation**: FastAPI provides automatic API documentation using OpenAPI via ReDoc and Swagger UI.
+- **Classification Model**: The API uses an OpenAI GPT-3.5 turbo model to predict transaction categories. These categories are predefined and stored in the database for each transaction, allowing for easy querying.
 
 ### Additional Notes
 
 - The API is designed to be simple and easy to use, with minimal setup and overhead.
 - The API is designed to be extensible, with the ability to add more endpoints and functionality as needed.
-- The API allowes querying transactions based on categories and/or counterpart names based on date ranges provided in the query params. See the API documentation for more details.
+- The API allowes querying transactions based on categories and/or counterpart names based on date(time) ranges provided in the query params. See the API documentation for more details.
 - The POST requests are assumed to be sent with lower_case keys in the JSON body. This was not an easy choice, but it was made to keep the codebase consistent and easy to read.
 - The transaction_id is not unique and is not used as a primary key. This was done to support the possibility of multiple transactions with the same transaction_id (e.g., in the case of refund or card decline). Instead, the primary key (`id` field) is generated for each transaction.
 

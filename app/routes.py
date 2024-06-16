@@ -59,7 +59,8 @@ async def get_transaction_by_id(
     session: Session = Depends(get_session),
 ) -> List[Transaction]:
     query = select(Transaction).where(Transaction.transaction_id == transaction_id)
-    result = session.exec(query)
+    result = session.exec(query).all()
+    # Check if the transaction exists or if result is empty
     if not result:
         raise HTTPException(status_code=404, detail="Transaction not found")
     return result
