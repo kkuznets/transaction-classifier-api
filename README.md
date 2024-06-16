@@ -109,7 +109,7 @@ pgAdmin4 can be used to manage the PostgreSQL database. To connect to the databa
 - **Configuration Management**: Poetry is used for dependency management and packaging.
 - **Database Migrations**: Alembic is used for handling database migrations if the schema changes.
 - **API Documentation**: FastAPI provides automatic API documentation using OpenAPI via ReDoc and Swagger UI.
-- **Classification Model**: The API uses an OpenAI GPT-3.5 turbo model to predict transaction categories. These categories are predefined and stored in the database for each transaction, allowing for easy querying.
+- **Classification Model**: The API uses an OpenAI GPT-3.5-turbo model to predict transaction categories. These categories are predefined and stored in the database for each transaction, allowing for easy querying.
 
 ### Additional Notes
 
@@ -118,6 +118,8 @@ pgAdmin4 can be used to manage the PostgreSQL database. To connect to the databa
 - The API allowes querying transactions based on categories and/or counterpart names based on date(time) ranges provided in the query params. See the API documentation for more details.
 - The POST requests are assumed to be sent with lower_case keys in the JSON body. This was not an easy choice, but it was made to keep the codebase consistent and easy to read.
 - The transaction_id is not unique and is not used as a primary key. This was done to support the possibility of multiple transactions with the same transaction_id (e.g., in the case of refund or card decline). Instead, the primary key (`id` field) is generated for each transaction.
+- The transaction category doesn't exist as a db table. Instead, it's stored in the `category` field of the `Transaction` model. This was done to simplify the database schema and queries. The allow-list of categories is stored in the Enum that is also used to filter categories in the serving API. This allows to easily add new categories and have them available in the API without changing the database schema.
+- OpenAI API is used to classify the transaction category. There was no training data provided, so it wasn't possible to pre-train custom models. It would be possible to build a custom classifier with sentence-transformers, but if previous experienceif any indication, its accuracy would be lower than that of GPT-3.5-turbo.
 
 ### Future Improvements
 
