@@ -69,9 +69,9 @@ Ensure you have the following installed on your system:
 The API provides the following endpoints:
 
 - **GET /transactions**: Retrieve a list of transactions.
-- **GET /transactions/{transaction_id}**: Retrieve a specific transaction by transaction_id (not unique).
-- **GET /categories**: Retrieve all categories with transaction counts and total amounts within a date range.
-- **GET /categories/{category_name}**: Retrieve transactions per category within a date range.
+- **GET /transactions/{transaction_id}**: Retrieve a specific transaction by transaction_id.
+- **GET /categories_summary**: Retrieve all categories with transaction counts and total amounts.
+- **GET /counterparts_per_category**: Retrieve unique counterpart names per category.
 - **POST /transactions**: Create a new transaction.
 
 Detailed programmatic API documentation can be accessed via either (if you're running the application locally):
